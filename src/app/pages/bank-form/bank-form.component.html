@@ -1,0 +1,43 @@
+<div class="flex flex-col md:flex-row gap-8">
+    <div class="card flex flex-col gap-6 w-full">
+        <div class="card flex flex-col gap-4">
+            <p-toast />
+            <div class="font-semibold text-xl">
+                {{ isEdit ? 'Edit' : 'Create' }} Bank
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-4">
+                <div class="flex flex-col gap-1">
+                    <label for="name">Name</label>
+                    <input pInputText id="name" formControlName="name"
+                        [class]="{ 'ng-invalid ng-dirty': form.get('name')?.invalid && (form.get('name')?.touched ) }"
+                        autocomplete="name" />
+                    @if (form.get('name')?.invalid && (form.get('name')?.touched )) {
+                    <small class="p-error">bank's name required</small>
+                    }
+                </div>
+                 <div class="flex flex-col gap-1">
+                    <label for="code">Code</label>
+                    <input pInputText id="code" formControlName="code" autocomplete="code" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="address">Address</label>
+                    <input pInputText id="address" formControlName="address" autocomplete="address" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="email">Email</label>
+                    <input type="email" pInputText id="email" formControlName="email"autocomplete="email" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="phone">Phone</label>
+                    <p-inputnumber  id="phone" formControlName="phone" autocomplete="phone" prefix="+216" [useGrouping]="false"/>
+                </div>
+
+                <div class="flex flex-wrap gap-1">
+                    <p-button label="Save" (click)="onSubmit()" [disabled]="form.invalid" [raised]="true"
+                        severity="primary" />
+                    <p-button label="Cancel" severity="secondary" (click)="onCancel()"></p-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

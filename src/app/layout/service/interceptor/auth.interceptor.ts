@@ -1,6 +1,5 @@
-import {HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { KeycloakService } from '../keycloak/keycloak.service';
 
 

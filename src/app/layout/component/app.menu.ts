@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AppMenuitem } from './app.menuitem';
+import { KeycloakService } from '../service/keycloak/keycloak.service';
 
 @Component({
     selector: 'app-menu',
@@ -17,10 +18,9 @@ import { AppMenuitem } from './app.menuitem';
 })
 export class AppMenu {
     model: MenuItem[] = [];
-
+    private keycloakService = inject(KeycloakService)
     ngOnInit() {
-        const roles: string[] = JSON.parse(localStorage.getItem('user_roles') || '[]');
-        console.log(roles)
+        const roles: string[] = this.keycloakService.Roles;
         this.model = [
             {
                 label: 'Home',

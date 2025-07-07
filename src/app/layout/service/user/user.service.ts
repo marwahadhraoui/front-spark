@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../auth.service';
+import { HttpClient} from '@angular/common/http';
 import { environment } from '../../../../../environment';
 import { User } from '../../../../Model/user';
 
@@ -10,21 +9,10 @@ import { User } from '../../../../Model/user';
 })
 export class UserService {
   private http = inject(HttpClient);
-  private authService = inject(AuthService);
   private apiUrl = `${environment.apiBaseUrl}/api/users`;
-  
-   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('access_token');
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-  }
-  
+    
   getUsers(): Observable<any> {
-    return this.http.get<any>(this.apiUrl, { 
-      headers: this.getAuthHeaders() 
-    }).pipe(
+    return this.http.get<any>(this.apiUrl).pipe(
       catchError(error => {
         return throwError(() => new Error('Failed to fetch users'));
       })
@@ -32,9 +20,7 @@ export class UserService {
   }
 
   deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${userId}`, {
-      headers: this.getAuthHeaders()
-    }).pipe(
+    return this.http.delete(`${this.apiUrl}/${userId}`).pipe(
       catchError(error => {
         console.error('Error deleting user:', error);
         return throwError(() => new Error('Failed to delete user'));

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { AppFloatingConfigurator } from '../../layout/component/app.floatingconfigurator';
+import { KeycloakService } from '../../layout/service/keycloak/keycloak.service';
 
 @Component({
     selector: 'app-access',
@@ -21,7 +22,7 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
                             <span class="text-muted-color mb-8">You do not have the necessary permisions. Please contact admins.</span>
                             <img src="https://primefaces.org/cdn/templates/sakai/auth/asset-access.svg" alt="Access denied" class="mb-8" width="80%" />
                             <div class="col-span-12 mt-8 text-center">
-                                <p-button label="Go to Dashboard" routerLink="/" severity="warn" />
+                                <p-button label="Go to Dashboard"  severity="warn" (click)="goToDashboard()"/>
                             </div>
                         </div>
                     </div>
@@ -29,4 +30,9 @@ import { AppFloatingConfigurator } from '../../layout/component/app.floatingconf
             </div>
         </div>`
 })
-export class Access {}
+export class Access {
+    private keycloakService = inject(KeycloakService);
+    goToDashboard() {
+        this.keycloakService.redirectBasedOnRole();
+    }
+}

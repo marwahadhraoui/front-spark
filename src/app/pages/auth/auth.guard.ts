@@ -4,16 +4,9 @@ import { KeycloakService } from '../../layout/service/keycloak/keycloak.service'
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
-  const keycloakService: KeycloakService = inject(KeycloakService);
-
-  const token = localStorage.getItem('access_token');
-  if (!token) {
-    keycloakService.logout();
-    return false;
-  }
-
+  const keycloakService = inject(KeycloakService);
   const allowedRoles = route.data?.['roles'] as string[] | undefined;
-  const storedRoles = JSON.parse(localStorage.getItem('user_roles') || '[]');
+  const storedRoles = keycloakService.Roles || '[]';
 
   if (allowedRoles && allowedRoles.length > 0) {
     const hasAccess = allowedRoles.some(role => storedRoles.includes(role));

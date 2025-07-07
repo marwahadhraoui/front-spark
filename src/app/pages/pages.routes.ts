@@ -20,9 +20,9 @@ export default [
     { path: 'app-region', component: RegionComponent, canActivate: [authGuard], data: { roles: ['ADMIN', 'REGION'] } },
     { path: 'app-bank', component: BankComponent, canActivate: [authGuard], data: { roles: ['ADMIN', 'BANK'] } },
     { path: 'edit/:id', component: UserFormComponent, data: { roles: ['ADMIN'] } },
-    { path: 'edit/area/:id', component: AreaFormComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+    { path: 'edit/area/:id', component: AreaFormComponent, canActivate: [authGuard], data: { roles: ['ADMIN','AREA'] } },
     { path: 'edit/region/:id', component: RegionFormComponent, canActivate: [authGuard], data: { roles: ['ADMIN', 'REGION'] } },
-    { path: 'edit/bank/:id', component: BankFormComponent, canActivate: [authGuard], data: { roles: ['ADMIN'] } },
+    { path: 'edit/bank/:id', component: BankFormComponent, canActivate: [authGuard], data: { roles: ['ADMIN','BANK'] } },
     { path: 'app-access', component: Access },
     { path: '**', redirectTo: '/notfound' }
 ] as Routes;

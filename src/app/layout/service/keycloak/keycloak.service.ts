@@ -54,10 +54,6 @@ export class KeycloakService {
     }
   }
 
-  login() {
-    return this.Keycloak.login({ redirectUri: '/user-list' });
-  }
-
   logout() {
     return this.Keycloak.logout({ redirectUri: 'http://localhost:4200' });
   }
@@ -77,7 +73,7 @@ export class KeycloakService {
     } else if (this._roles.includes('BANK')) {
       this.router.navigate(['/pages/app-bank']);
     } else {
-      this.router.navigate(['/pages/auth/app-access']);
+      this.router.navigate(['app-access']);
     }
   }
 

@@ -66,7 +66,7 @@ export class AreaFormComponent implements OnInit {
       },
       error: () => {
         this.showErrorViaToast("error", "Error", "deletion failed ! ", 3000);
-        this.router.navigate(['/app-areas']);
+        this.router.navigate(['/pages/app-area']);
       }
     });
   }
